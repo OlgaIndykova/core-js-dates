@@ -32,8 +32,16 @@ function dateToTimestamp(date) {
  * Date(2023, 5, 1, 8, 20, 55) => '08:20:55'
  * Date(2015, 10, 20, 23, 15, 1) => '23:15:01'
  */
-function getTime(/* date */) {
-  throw new Error('Not implemented');
+function getTime(date) {
+  const day = new Date(date);
+  let hour = day.getHours();
+  let minute = day.getMinutes();
+  let second = day.getSeconds();
+  if (hour < 10) hour = `0${hour}`;
+  if (minute < 10) minute = `0${minute}`;
+  if (second < 10) second = `0${second}`;
+  const timeStr = `${hour}:${minute}:${second}`;
+  return timeStr;
 }
 
 /**
@@ -188,8 +196,29 @@ function isDateInPeriod(date, period) {
  * '1999-01-05T02:20:00.000Z' => '1/5/1999, 2:20:00 AM'
  * '2010-12-15T22:59:00.000Z' => '12/15/2010, 10:59:00 PM'
  */
-function formatDate(/* date */) {
-  throw new Error('Not implemented');
+function formatDate(date) {
+  const data = new Date(date);
+  const year = data.getUTCFullYear();
+  const month = data.getUTCMonth();
+  const day = data.getUTCDay();
+  let hour = data.getUTCHours();
+  let minute = data.getUTCMinutes();
+  let second = data.getUTCSeconds();
+  let res;
+  if (minute < 10) {
+    minute = `0${minute}`;
+  }
+  if (second < 10) {
+    second = `0${second}`;
+  }
+  if (hour < 12) {
+    res = `${day}/${month}/${year}, ${hour}:${minute}:${second} AM`;
+  }
+  if (hour > 12) {
+    hour -= 12;
+    res = `${day}/${month}/${year}, ${hour}:${minute}:${second} PM`;
+  }
+  return res;
 }
 
 /**
@@ -304,8 +333,14 @@ function getWorkSchedule(/* period, countWorkDays, countOffDays */) {
  * Date(2022, 2, 1) => false
  * Date(2020, 2, 1) => true
  */
-function isLeapYear(/* date */) {
-  throw new Error('Not implemented');
+function isLeapYear(date) {
+  const data = new Date(date);
+  const year = data.getFullYear();
+  let res;
+  if (year % 4 === 0) {
+    res = true;
+  } else res = false;
+  return res;
 }
 
 module.exports = {
