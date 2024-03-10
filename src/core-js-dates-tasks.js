@@ -199,8 +199,8 @@ function isDateInPeriod(date, period) {
 function formatDate(date) {
   const data = new Date(date);
   const year = data.getUTCFullYear();
-  const month = data.getUTCMonth();
-  const day = data.getUTCDay();
+  const month = data.getUTCMonth() + 1;
+  const day = data.getUTCDate();
   let hour = data.getUTCHours();
   let minute = data.getUTCMinutes();
   let second = data.getUTCSeconds();
@@ -212,11 +212,14 @@ function formatDate(date) {
     second = `0${second}`;
   }
   if (hour < 12) {
-    res = `${day}/${month}/${year}, ${hour}:${minute}:${second} AM`;
+    res = `${month}/${day}/${year}, ${hour}:${minute}:${second} AM`;
   }
   if (hour > 12) {
     hour -= 12;
-    res = `${day}/${month}/${year}, ${hour}:${minute}:${second} PM`;
+    res = `${month}/${day}/${year}, ${hour}:${minute}:${second} PM`;
+  }
+  if (hour === 12) {
+    res = `${month}/${day}/${year}, ${hour}:${minute}:${second} PM`;
   }
   return res;
 }
