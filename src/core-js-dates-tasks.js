@@ -17,8 +17,9 @@
  * '01 Jan 1970 00:00:00 UTC' => 0
  * '04 Dec 1995 00:12:00 UTC' => 818035920000
  */
-function dateToTimestamp(/* date */) {
-  throw new Error('Not implemented');
+function dateToTimestamp(date) {
+  const milisec = new Date(date);
+  return milisec.getTime();
 }
 
 /**
@@ -46,8 +47,32 @@ function getTime(/* date */) {
  * '03 Dec 1995 00:12:00 UTC' => 'Sunday'
  * '2024-01-30T00:00:00.000Z' => 'Tuesday'
  */
-function getDayName(/* date */) {
-  throw new Error('Not implemented');
+function getDayName(date) {
+  const day = new Date(date);
+  const weekday = day.getDay();
+  let res;
+  if (weekday === 0) {
+    res = 'Sunday';
+  }
+  if (weekday === 1) {
+    res = 'Monday';
+  }
+  if (weekday === 2) {
+    res = 'Tuesday';
+  }
+  if (weekday === 3) {
+    res = 'Wednesday';
+  }
+  if (weekday === 4) {
+    res = 'Thursday';
+  }
+  if (weekday === 5) {
+    res = 'Friday';
+  }
+  if (weekday === 6) {
+    res = 'Saturday';
+  }
+  return res;
 }
 
 /**
@@ -190,8 +215,23 @@ function getNextFridayThe13th(/* date */) {
  * Date(2024, 5, 1) => 2
  * Date(2024, 10, 10) => 4
  */
-function getQuarter(/* date */) {
-  throw new Error('Not implemented');
+function getQuarter(date) {
+  const mounth = new Date(date);
+  const currentMounth = mounth.getMonth();
+  let res;
+  if (currentMounth === 0 || currentMounth === 1 || currentMounth === 2) {
+    res = 1;
+  }
+  if (currentMounth === 3 || currentMounth === 4 || currentMounth === 5) {
+    res = 2;
+  }
+  if (currentMounth === 6 || currentMounth === 7 || currentMounth === 8) {
+    res = 3;
+  }
+  if (currentMounth === 9 || currentMounth === 10 || currentMounth === 11) {
+    res = 4;
+  }
+  return res;
 }
 
 /**
