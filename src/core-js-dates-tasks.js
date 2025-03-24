@@ -295,25 +295,24 @@ function getCountWeekendsInMonth(month, year) {
 function getWeekNumberByDate(date) {
   const year = date.getFullYear();
   const startDay = new Date(year, 0, 1);
-  const daysAmount = Math.floor((date - startDay) / (1000 * 60 * 60 * 24));
-  const offset = (startDay.getDay() + 6) % 7;
-  // let weekNumber;
-  // if (startDay.getDay() === 1) {
-  //   weekNumber = daysAmount / 7;
-  // } else if (startDay.getDay() === 2) {
-  //   weekNumber = (daysAmount + 1) / 7;
-  // } else if (startDay.getDay() === 3) {
-  //   weekNumber = (daysAmount + 2) / 7;
-  // } else if (startDay.getDay() === 4) {
-  //   weekNumber = (daysAmount + 3) / 7;
-  // } else if (startDay.getDay() === 5) {
-  //   weekNumber = (daysAmount + 4) / 7;
-  // } else if (startDay.getDay() === 6) {
-  //   weekNumber = (daysAmount + 5) / 7;
-  // } else if (startDay.getDay() === 0) {
-  //   weekNumber = (daysAmount + 6) / 7;
-  // }
-  return Math.ceil((daysAmount + offset) / 7);
+  const daysAmount = Math.floor(date - startDay) / (1000 * 60 * 60 * 24) + 1;
+  let weekNumber;
+  if (startDay.getDay() === 1) {
+    weekNumber = daysAmount / 7;
+  } else if (startDay.getDay() === 2) {
+    weekNumber = (daysAmount + 1) / 7;
+  } else if (startDay.getDay() === 3) {
+    weekNumber = (daysAmount + 2) / 7;
+  } else if (startDay.getDay() === 4) {
+    weekNumber = (daysAmount + 3) / 7;
+  } else if (startDay.getDay() === 5) {
+    weekNumber = (daysAmount + 4) / 7;
+  } else if (startDay.getDay() === 6) {
+    weekNumber = (daysAmount + 5) / 7;
+  } else if (startDay.getDay() === 0) {
+    weekNumber = (daysAmount + 6) / 7;
+  }
+  return Math.ceil(weekNumber);
 }
 
 /**
